@@ -9,7 +9,7 @@ const SocialMediaAnalyzer = () => {
   const fileInputRef = useRef(null);
   //const apiUrl = 'http://localhost:5000/api';
   //const apiUrl = import.meta.env.VITE_API_URL;
-  const apiUrl = import.meta.env.VITE_API_URL || 'https://social-media-content-analyzer-30ky.onrender.com';
+  const apiUrl = import.meta.env.VITE_API_URL || 'https://social-media-content-analyzer-30ky.onrender.com/';
 
 
   // File validation
@@ -68,7 +68,7 @@ const SocialMediaAnalyzer = () => {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await fetch(`${apiUrl}api/upload`, {
+      const response = await fetch(`${apiUrl}/api/upload`, {
         method: 'POST',
         body: formData
       });
