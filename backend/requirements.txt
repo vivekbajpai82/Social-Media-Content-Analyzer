@@ -1,8 +1,6 @@
 Flask==2.3.3
 Flask-CORS==4.0.0
-easyocr
-opencv-python-headless
-numpy
+pytesseract==0.3.10
 Pillow>=10.1.0
 PyPDF2==3.0.1
 Werkzeug==2.3.7
