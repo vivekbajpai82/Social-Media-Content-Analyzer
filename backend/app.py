@@ -17,7 +17,6 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
 # CORS configuration for development and production
-# CORS configuration for development and production
 CORS(app, origins=[
     "http://localhost:5173",  # Vite dev server default
     "http://localhost:3000",  # React dev server alternative
@@ -40,16 +39,61 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 # Import processors with error handling
 try:
     from utils.pdf_processor import PDFProcessor
-    from utils.ocr_processor import OCRProcessor
     from utils.analyzer import SocialMediaAnalyzer
     
     # Initialize processors
     pdf_processor = PDFProcessor()
-    ocr_processor = OCRProcessor()
     analyzer = SocialMediaAnalyzer()
     
+    # Initialize EasyOCR instead of Tesseract
+    import easyocr
+    import numpy as np
+    from PIL import Image
+    import io
+    
+    class EasyOCRProcessor:
+        def __init__(self):
+            self.reader = easyocr.Reader(['en'])
+            logger.info("EasyOCR processor initialized successfully")
+        
+        def extract_text(self, file_data):
+            try:
+                # Convert file data to PIL Image
+                image = Image.open(io.BytesIO(file_data))
+                
+                # Convert PIL Image to numpy array
+                img_array = np.array(image)
+                
+                # Extract text using EasyOCR
+                results = self.reader.readtext(img_array)
+                
+                # Combine all detected text
+                extracted_text = ' '.join([item[1] for item in results])
+                
+                # Calculate confidence (average of all detections)
+                if results:
+                    confidence = sum([item[2] for item in results]) / len(results)
+                else:
+                    confidence = 0
+                
+                return {
+                    'success': True,
+                    'text': extracted_text if extracted_text.strip() else "No text found in image",
+                    'confidence': confidence,
+                    'detections': len(results)
+                }
+                
+            except Exception as e:
+                logger.error(f"EasyOCR processing error: {e}")
+                return {
+                    'success': False,
+                    'error': f"OCR processing error: {str(e)}",
+                    'text': ''
+                }
+    
+    ocr_processor = EasyOCRProcessor()
     processors_loaded = True
-    logger.info("All processors loaded successfully")
+    logger.info("All processors loaded successfully with EasyOCR")
     
 except ImportError as e:
     logger.error(f"Failed to import processors: {e}")
@@ -80,7 +124,6 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
-# Remove the static file serving routes - React dev server handles this
 @app.route('/')
 def index():
     """API status endpoint"""
@@ -88,6 +131,7 @@ def index():
         'message': 'Social Media Content Analyzer API',
         'status': 'running',
         'version': '1.0.0',
+        'ocr_engine': 'EasyOCR',
         'endpoints': {
             'upload': '/api/upload',
             'analyze': '/api/analyze', 
@@ -95,9 +139,6 @@ def index():
         },
         'frontend_info': 'React frontend should be served separately on port 5173 (Vite dev server)'
     })
-
-# React frontend will be served separately on different platform
-# No static file serving needed - pure API backend
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
@@ -161,7 +202,7 @@ def upload_file():
                 processing_method = 'PDF'
             else:
                 result = ocr_processor.extract_text(file_data)
-                processing_method = 'OCR'
+                processing_method = 'EasyOCR'
                 
         except Exception as e:
             logger.error(f"Error during text extraction: {e}")
@@ -216,10 +257,11 @@ def upload_file():
         }
         
         # Add OCR-specific info
-        if processing_method == 'OCR' and 'confidence' in result:
-            response_data['processing_info']['ocr_confidence'] = result['confidence']
+        if processing_method == 'EasyOCR':
+            response_data['processing_info']['ocr_confidence'] = result.get('confidence', 0)
+            response_data['processing_info']['detections'] = result.get('detections', 0)
         
-        logger.info(f"Successfully processed {original_filename}")
+        logger.info(f"Successfully processed {original_filename} using {processing_method}")
         return jsonify(response_data)
         
     except Exception as e:
@@ -284,6 +326,7 @@ def health_check():
     return jsonify({
         'status': 'healthy',
         'processors_loaded': processors_loaded,
+        'ocr_engine': 'EasyOCR' if processors_loaded else 'None',
         'timestamp': datetime.now().isoformat(),
         'version': '1.0.0',
         'upload_folder_exists': os.path.exists(app.config['UPLOAD_FOLDER']),
@@ -319,6 +362,7 @@ if __name__ == '__main__':
     logger.info("Starting Social Media Content Analyzer API Server...")
     logger.info(f"Upload folder: {app.config['UPLOAD_FOLDER']}")
     logger.info(f"Processors loaded: {processors_loaded}")
+    logger.info(f"OCR Engine: {'EasyOCR' if processors_loaded else 'None'}")
     logger.info(f"Gemini API configured: {bool(os.getenv('GEMINI_API_KEY'))}")
     logger.info("Backend API running on: http://localhost:5000")
     logger.info("Frontend should run on: http://localhost:5173 (Vite dev server)")
