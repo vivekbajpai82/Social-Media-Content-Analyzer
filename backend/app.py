@@ -17,14 +17,13 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
 # CORS configuration for development and production
+# CORS configuration for development and production
 CORS(app, origins=[
     "http://localhost:5173",  # Vite dev server default
     "http://localhost:3000",  # React dev server alternative
     "http://127.0.0.1:5173",
     "http://127.0.0.1:3000",
-    # Add your production frontend URLs here
-    # "https://your-app.vercel.app",
-    # "https://your-app.netlify.app"
+    "https://social-content-analyzer.netlify.app"  # Production frontend
 ])
 
 # Configuration
