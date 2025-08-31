@@ -234,7 +234,7 @@ Full-stack application with **Python Flask backend** and **React frontend**, des
 ## 📧 Contact
 
 **Developer**: Vivek Bajpai  
-Email: vivekbajpai82@gmail.com
+**Email**: vivekbajpai82@gmail.com
 **GitHub**: [@vivekbajpai82](https://github.com/vivekbajpai82)  
 **Repository**: [Social-Media-Content-Analyzer](https://github.com/vivekbajpai82/Social-Media-Content-Analyzer)
 
