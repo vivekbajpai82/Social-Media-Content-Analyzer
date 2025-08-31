@@ -96,14 +96,47 @@ source venv/bin/activate
 pip install -r backend/requirements.txt
 ```
 
-### 3. Environment Configuration
+## 3. Environment Configuration
+
+### Backend Environment
 Create a `.env` file in the `backend/` directory:
+
 ```env
-API_KEY=your_google_gemini_api_key_here
+GEMINI_API_KEY=your_google_gemini_api_key_here
 TESSERACT_PATH=C:\Program Files\Tesseract-OCR\tesseract.exe
 ```
 
-> **Note**: Update the Tesseract path in `backend/utils/ocr_processor.py` if installed in a different directory.
+### Frontend Environment  
+Create a `.env` file in the `frontend/` directory:
+
+**For Local Development:**
+```env
+VITE_API_URL=http://127.0.0.1:5000
+```
+
+**For Production/Hosted Version:**
+```env
+VITE_API_URL=https://your-deployed-backend-url.herokuapp.com
+```
+*Replace with your actual backend deployment URL*
+
+### Environment Variables Explanation
+
+**Backend Variables:**
+- `GEMINI_API_KEY`: Your Google Gemini API key for AI-powered analysis
+- `TESSERACT_PATH`: Path to Tesseract OCR executable (Windows path shown, adjust for Mac/Linux)
+
+**Frontend Variables:**
+- `VITE_API_URL`: Backend API endpoint URL
+  - Local: Points to Flask development server
+  - Production: Points to deployed backend service
+
+**Important Notes:**
+- All frontend environment variables must be prefixed with `VITE_` for Vite build system
+- Update Tesseract path in `backend/utils/ocr_processor.py` if installed in different directory
+- For Mac/Linux, Tesseract path is usually `/usr/bin/tesseract` or `/usr/local/bin/tesseract`
+- Never commit `.env` files to version control - they're already in `.gitignore`
+- Get Google Gemini API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
 
 ### 4. Frontend Setup
 ```bash
