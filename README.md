@@ -149,11 +149,12 @@
 
 -----------------------------------------------------------------------------------------------------------
 -->Usage
-      1. Upload a PDF or image file
-      2. Extract text automatically
-      3. Get AI-powered engagement suggestions
-      4. View insights for different social platforms
+    1. Upload a PDF or image file
+    2. Extract text automatically
+    3. Get AI-powered engagement suggestions
+    4. View insights for different social platforms
 -----------------------------------------------------------------------------------------------------------
 --> Live Link 
     https://social-content-analyzer.netlify.app/
 --> github repository link
+    https://github.com/vivekbajpai82/Social-Media-Content-Analyzer
