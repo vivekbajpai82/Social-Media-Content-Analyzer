@@ -154,4 +154,6 @@
       3. Get AI-powered engagement suggestions
       4. View insights for different social platforms
 -----------------------------------------------------------------------------------------------------------
---> Working application URL
+--> Live Link 
+    https://social-content-analyzer.netlify.app/
+--> github repository link
