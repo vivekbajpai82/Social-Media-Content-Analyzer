@@ -1,9 +1,7 @@
 # 🚀 Social Media Content Analyzer
-
 A powerful full-stack application that analyzes social media posts and suggests engagement improvements. Upload PDFs or images, extract text using OCR, and get AI-powered insights optimized for Twitter, Instagram, Facebook, and LinkedIn.
 
 ## ✨ Features
-
 - 📄 **Multi-format Support**: Upload PDF and image files for analysis
 - 🔍 **Smart Text Extraction**: Direct PDF text extraction and OCR for scanned documents
 - 🤖 **AI-Powered Analysis**: Google Gemini integration for intelligent content suggestions
@@ -26,7 +24,6 @@ A powerful full-stack application that analyzes social media posts and suggests 
 - **Features**: Drag-and-drop interface, real-time validation
 
 ## 📁 Project Structure
-
 ```
 SOCIAL_MEDIA/
 │
@@ -96,9 +93,9 @@ source venv/bin/activate
 pip install -r backend/requirements.txt
 ```
 
-## 3. Environment Configuration
+### 3. Environment Configuration
 
-### Backend Environment
+#### Backend Environment
 Create a `.env` file in the `backend/` directory:
 
 ```env
@@ -106,7 +103,7 @@ GEMINI_API_KEY=your_google_gemini_api_key_here
 TESSERACT_PATH=C:\Program Files\Tesseract-OCR\tesseract.exe
 ```
 
-### Frontend Environment  
+#### Frontend Environment
 Create a `.env` file in the `frontend/` directory:
 
 **For Local Development:**
@@ -120,7 +117,7 @@ VITE_API_URL=https://your-deployed-backend-url.herokuapp.com
 ```
 *Replace with your actual backend deployment URL*
 
-### Environment Variables Explanation
+#### Environment Variables Explanation
 
 **Backend Variables:**
 - `GEMINI_API_KEY`: Your Google Gemini API key for AI-powered analysis
@@ -151,17 +148,16 @@ npm install
 cd backend
 python app.py
 ```
-Backend runs on: `http://127.0.0.1:5000`
+Backend runs on: http://127.0.0.1:5000
 
 #### Start Frontend
 ```bash
 cd frontend
 npm run dev
 ```
-Frontend runs on: `http://localhost:5173`
+Frontend runs on: http://localhost:5173
 
 ## 🎯 Usage
-
 1. **Upload Content**: Drag and drop or select PDF/image files
 2. **Automatic Processing**: Text extraction via OCR or direct PDF parsing
 3. **AI Analysis**: Get intelligent engagement suggestions powered by Google Gemini
@@ -171,23 +167,23 @@ Frontend runs on: `http://localhost:5173`
 ## 🏗️ Technical Architecture & Approach
 
 ### Architecture Overview
-Full-stack application with **Python Flask backend** and **React frontend**, designed for extracting and analyzing social media content from documents and images.
+Full-stack application with Python Flask backend and React frontend, designed for extracting and analyzing social media content from documents and images.
 
 ### Backend Approach (Python)
 
 #### Core Components
-- **Flask API** with CORS configuration for cross-origin requests
-- **Multi-format processing pipeline** supporting PDF and image files
-- **Modular processor architecture** with dedicated classes for OCR, PDF, and content analysis
+- Flask API with CORS configuration for cross-origin requests
+- Multi-format processing pipeline supporting PDF and image files
+- Modular processor architecture with dedicated classes for OCR, PDF, and content analysis
 
 #### Text Extraction Strategy
 - **OCR Processing**: Tesseract engine via pytesseract for image-to-text conversion with confidence scoring
 - **PDF Processing**: PyPDF2 for direct text extraction from PDF documents
-- **File validation and security** with secure filename handling and automatic cleanup
+- **File validation** and security with secure filename handling and automatic cleanup
 
 #### AI-Powered Analysis Engine
-- **Google Gemini API integration** for intelligent content suggestions
-- **Multi-dimensional analysis framework**:
+- Google Gemini API integration for intelligent content suggestions
+- Multi-dimensional analysis framework:
   - Basic metrics (word count, readability scores via textstat)
   - Social elements detection (hashtags, mentions, emojis, CTAs)
   - Platform-specific optimization for Twitter, Instagram, Facebook, LinkedIn
@@ -201,16 +197,16 @@ Full-stack application with **Python Flask backend** and **React frontend**, des
 ### Frontend Approach (React)
 
 #### User Experience Design
-- **Modern React 18** with hooks (useState, useEffect, useRef)
-- **Drag-and-drop interface** with real-time file validation
-- **Progressive loading states** with animated feedback
-- **Responsive grid layouts** for multi-platform results display
+- Modern React 18 with hooks (useState, useEffect, useRef)
+- Drag-and-drop interface with real-time file validation
+- Progressive loading states with animated feedback
+- Responsive grid layouts for multi-platform results display
 
 #### Results Visualization
-- **Comprehensive analytics dashboard** showing content metrics, readability scores, and social elements
-- **Platform suitability analysis** with visual indicators and recommendations
-- **Priority-coded suggestions** with actionable improvement tips
-- **Interactive features** including keyboard shortcuts and print functionality
+- Comprehensive analytics dashboard showing content metrics, readability scores, and social elements
+- Platform suitability analysis with visual indicators and recommendations
+- Priority-coded suggestions with actionable improvement tips
+- Interactive features including keyboard shortcuts and print functionality
 
 #### Technical Implementation
 **Key Technologies:**
@@ -219,25 +215,22 @@ Full-stack application with **Python Flask backend** and **React frontend**, des
 - **Deployment**: Environment-based configuration with production readiness
 
 ## 🌟 Innovation Points
-
-- **Multi-format content extraction** combining OCR and PDF processing
-- **AI-enhanced suggestions** using Google Gemini for contextual recommendations
-- **Real-time platform optimization** analysis across major social media platforms
-- **Comprehensive readability assessment** with multiple scoring algorithms
+- Multi-format content extraction combining OCR and PDF processing
+- AI-enhanced suggestions using Google Gemini for contextual recommendations
+- Real-time platform optimization analysis across major social media platforms
+- Comprehensive readability assessment with multiple scoring algorithms
 
 ## 🚀 Live Demo & Repository
 
-**🌐 Live Application**: [https://social-content-analyzer.netlify.app/](https://social-content-analyzer.netlify.app/)
+🌐 **Live Application**: https://social-content-analyzer.netlify.app/
 
-**📂 GitHub Repository**: [https://github.com/vivekbajpai82/Social-Media-Content-Analyzer](https://github.com/vivekbajpai82/Social-Media-Content-Analyzer)
+📂 **GitHub Repository**: https://github.com/vivekbajpai82/Social-Media-Content-Analyzer
 
 ## 📧 Contact
 
-📧 Contact
-Developer: Vivek Bajpai
-Email: vivekbajpai82@gmail.com
-GitHub: @vivekbajpai82
-Repository: Social-Media-Content-Analyzer
----
+**Developer**: Vivek Bajpai  
+**Email**: vivekbajpai82@gmail.com  
+**GitHub**: @vivekbajpai82  
+**Repository**: Social-Media-Content-Analyzer
 
-⭐ **If you found this project helpful, please give it a star!** ⭐
+⭐ If you found this project helpful, please give it a star! ⭐
