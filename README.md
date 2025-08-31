@@ -31,25 +31,38 @@ A powerful full-stack application that analyzes social media posts and suggests 
 SOCIAL_MEDIA/
 │
 ├── backend/                         # Flask backend
-│   ├── app.py                       # Main application entry
-│   ├── config.py                    # Configuration management
-│   ├── utils/                       # Helper functions (OCR, NLP)
+│   ├── __pycache__/                # Python cache files
 │   ├── uploads/                     # Uploaded files directory
+│   ├── utils/                       # Helper functions
+│   │   ├── analyzer.py             # Content analysis logic
+│   │   ├── ocr_processor.py        # OCR processing
+│   │   └── pdf_processor.py        # PDF text extraction
+│   ├── venv/                        # Virtual environment
+│   ├── .dockerignore               # Docker ignore rules
+│   ├── app.py                       # Main Flask application
+│   ├── config.py                    # Configuration management
+│   ├── Dockerfile                   # Docker container config
+│   ├── Profile                      # Deployment profile
 │   ├── requirements.txt             # Python dependencies
-│   ├── Procfile                     # Deployment configuration
-│   ├── apt.txt                      # System dependencies
 │   └── .env                         # Environment variables
 │
 ├── frontend/                        # React frontend
+│   ├── dist/                        # Build output directory
+│   ├── node_modules/                # Node.js dependencies
 │   ├── public/                      # Static assets
-│   ├── src/
+│   ├── src/                         # Source code
 │   │   ├── components/              # React components
+│   │   │   └── SocialMediaA...      # Main analyzer component
 │   │   ├── App.jsx                  # Main app component
-│   │   ├── index.css                # Global styles
-│   │   └── main.jsx                 # App entry point
+│   │   └── index.css                # Global styles
+│   ├── .headers                     # HTTP headers config
+│   ├── .env                         # Frontend environment variables
+│   ├── eslint.config.js             # ESLint configuration
+│   ├── index.html                   # HTML template
+│   ├── netlify.toml                 # Netlify deployment config
+│   ├── package-lock.json            # Dependency lock file
 │   ├── package.json                 # Node dependencies
-│   ├── vite.config.js               # Vite configuration
-│   └── .env                         # Frontend environment variables
+│   └── vite.config.js               # Vite configuration
 │
 ├── .gitignore                       # Git ignore rules
 └── README.md                        # Project documentation
